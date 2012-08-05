@@ -1,20 +1,6 @@
 (function ($) {
-    $.cleditor.buttons.movie = {
-        name: 'movie',
-        image: 'allocine.png',
-        title: 'Créer une fiche de film',
-        command: 'inserthtml',
-        popupName: 'movie',
-        popupClass: 'cleditorPrompt',
-        popupContent: $.tplallocine.popup,
-        buttonClick: movieClick
-    }
-    // Add the button to the default controls before the bold button
-    $.cleditor.defaultOptions.controls = $.cleditor.defaultOptions.controls
-        .replace('bold', 'movie bold');
-
     // Handle the allocine button click event
-    function movieClick(e, data) {
+    var movieClick = function (e, data) {
         // Wire up the submit button click event
         $(data.popup).children('input#searchmovie').keyup(function () {
             var $this = $(this);
@@ -34,24 +20,37 @@
                                 });
                             }
                         }
-                    })
+                    });
                 } else {
                     $("#movielist").html('');
                 }
             }, 500));
         });
-    }
+    },
+        showMovie = function (code, data) {
+            var editor = data.editor;
+            
+            $(editor).allocine('getMovie', code, {
+                success: function (response) {
+                    editor.execCommand(data.command, Mustache.render($.tplallocine.movie, response.movie), null, data.button);
+                }
+            });
 
-    function showMovie (code, data) {
-        var editor = data.editor;
-        
-        $(editor).allocine('getMovie', code, {
-            success: function (response) {
-                editor.execCommand(data.command, Mustache.render($.tplallocine.movie, response.movie), null, data.button);
-            }
-        });
+            editor.hidePopups();
+            editor.focus();
+        };
 
-        editor.hidePopups();
-        editor.focus();
-    }
+    $.cleditor.buttons.movie = {
+        name: 'movie',
+        image: 'allocine.png',
+        title: 'Créer une fiche de film',
+        command: 'inserthtml',
+        popupName: 'movie',
+        popupClass: 'cleditorPrompt',
+        popupContent: $.tplallocine.popup,
+        buttonClick: movieClick
+    };
+    // Add the button to the default controls before the bold button
+    $.cleditor.defaultOptions.controls = $.cleditor.defaultOptions.controls
+        .replace('bold', 'movie bold');
 }(jQuery));
