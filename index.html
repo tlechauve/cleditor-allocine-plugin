@@ -6,20 +6,37 @@
     <title>Index</title>
     <link rel="stylesheet" href="jquery.cleditor.css"/>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/tlechauve/AllocineJS/master/dist/jquery.allocine.min.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/janl/mustache.js/master/mustache.js"></script>
     <script type="text/javascript" src="jquery.cleditor.js"></script>
-    <script type="text/javascript" src="jquery.cleditor.allocine.js"></script>
     <script type="text/javascript">
+        // Load templates in jQuery object
+        // Used for development only !
+        $.tplallocine = {};
+        $.each(['movie', 'popup', 'movieitem'], function () {
+            var tplname = this;
+            $.ajax('templates/' + tplname + '.html', {
+                success: function (html) {
+                    $.tplallocine[tplname] = html.replace(/[\n\r]/g,'').replace(/\s\s+/g, '');
+                },
+                async: false
+            });
+        });
+        // Initialize and show cleditor
         $(function () {
             var editor = $('#editor').cleditor({
                 width: '100%',
-                height: '100%'
+                height: '100%',
+                useCSS: true
             })[0].focus();
             $(window).resize(function () {
                 $('#container').height($(this).height() - 32);
                 editor.refresh();
             }).trigger('resize');
+            
         });
     </script>
+    <script type="text/javascript" src="jquery.cleditor.allocine.js"></script>
 </head>
 <body>
     <div id="container">
