@@ -647,13 +647,14 @@ var Mustache;
     },
         showMovie = function (code, data) {
             var editor = data.editor;
-            
             $(editor).allocine('getMovie', code, {
                 success: function (response) {
-                    editor.execCommand(data.command, Mustache.render($.tplallocine.movie, response.movie), null, data.button);
+                    var style = $.tplallocine.movie.substr(0, ($.tplallocine.movie.indexOf('</style>') + 8)),
+                        tpl = $.tplallocine.movie.replace(style, '');
+                    $(editor.doc.head).html(style);
+                    editor.execCommand(data.command, Mustache.render(tpl, response.movie), null, data.button);
                 }
             });
-
             editor.hidePopups();
             editor.focus();
         };

@@ -46,6 +46,7 @@ module.exports = function(grunt) {
       },
       globals: {
         jQuery: true,
+        console: true,
         Mustache: true
       }
     },

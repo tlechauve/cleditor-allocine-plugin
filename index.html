@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="jquery.cleditor.css"/>
     <script type="text/javascript" src="libs/jquery/jquery.js"></script>
     <script type="text/javascript" src="libs/allocine/jquery.allocine.js"></script>
-    <script type="text/javascript" src="libs/mustache/mustache.js"></script>
     <script type="text/javascript" src="jquery.cleditor.js"></script>
     <script type="text/javascript">
         // Load templates in jQuery object
@@ -25,15 +24,8 @@
         // Initialize and show cleditor
         $(function () {
             var editor = $('#editor').cleditor({
-                width: '100%',
-                height: '100%',
                 useCSS: true
             })[0].focus();
-            $(window).resize(function () {
-                $('#container').height($(this).height() - 32);
-                editor.refresh();
-            }).trigger('resize');
-            
         });
     </script>
     <script type="text/javascript" src="dist/jquery.cleditor.allocine.js"></script>
