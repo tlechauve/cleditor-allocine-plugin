@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-          src: ['<banner:meta.banner>', '<file_strip_banner:libs/mustache/mustache.js>', '<file_strip_banner:src/jquery.cleditor.allocine.js>'],
+          src: ['<banner:meta.banner>', '<file_strip_banner:libs/mustache/mustache.js>', '<file_strip_banner:libs/allocine/jquery.allocine.js>', '<file_strip_banner:src/jquery.cleditor.allocine.js>'],
         dest: 'dist/jquery.cleditor.allocine.js'
       }
     },
