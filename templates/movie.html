@@ -1,0 +1,49 @@
+<style>
+    .moviecontainer {
+        background-color: #e6e6e6;
+        height: 300px;
+        font-size: 0.9em;
+    }
+    .moviecontainer img {
+        height: inherit;
+        vertical-align: middle;
+    }
+    .moviedescription {
+        padding: 10px 20px 10px 20px;
+        height: 280px;
+        overflow: auto;
+        color: #1F1F1F;
+    }
+    .moviedescription span {
+        font-size: 1.1em;
+    }
+    .moviedescription table td {
+        min-width: 90px;
+    }
+    .moviesynopsis {
+        font-style: italic;
+        padding: 10px;
+        background-color: white;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        -moz-box-shadow: 5px 6px 13px #000000;
+        -webkit-box-shadow: 5px 6px 13px #000000;
+        box-shadow: 5px 6px 13px #000000;
+        font-size: 0.9em;
+    }
+
+</style>
+<div class="moviecontainer">
+    <img src="{{poster.href}}" align="left"/>
+    <div class="moviedescription">
+        <span>{{ originalTitle }}</span>
+        <table>
+            <tr><td>Réalisateur</td><td>{{castingShort.directors}}</td></tr>
+            <tr><td>Acteurs</td><td>{{castingShort.actors}}, ...</td></tr>
+            <tr><td>Date de sortie</td><td>{{release.releaseDate}}</td></tr>
+            <tr><td>Durée</td><td>{{runtime}}</td></tr>
+        </table>
+        <div class="moviesynopsis">{{synopsis}}</div>
+    </div>
+</div>

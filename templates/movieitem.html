@@ -1,0 +1,42 @@
+<style>
+    .movieitem {
+        height: 50px;
+        min-width: 200px;
+        background-color: #efefef;
+        margin: 1px 0px 1px 0px;
+    }
+    .movieitem:hover {
+        background-color: #e0e0e0;
+        cursor: pointer;
+    }
+    .movieitemdesc {
+        color: black;
+        margin-left: 40px;
+        padding: 2px 10px 10px 2px;
+        font-size: 0.9em;
+        line-height: 180%;
+    }
+    .movieitem img {
+        height: inherit;
+    }
+    .movietitle {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+    .movieyear {
+        font-style: italic;
+    }
+</style>
+{{# movie }}
+<li class="movieitem" data-idcode="{{ code }}">
+    <img src="{{ poster.href }}" align="left"/>
+    <div class="movieitemdesc">
+        <span class="movietitle">
+        {{# title }} {{ title }} {{/ title }}
+        {{^ title }} {{ originalTitle }} {{/ title }}
+        </span>
+        <span class="movieyear">({{ productionYear }})</span><br/>
+        de {{ castingShort.directors }}
+    </div>
+</li>
+{{/ movie }}
