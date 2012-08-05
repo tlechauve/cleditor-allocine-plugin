@@ -650,7 +650,12 @@ var Mustache;
             $(editor).allocine('getMovie', code, {
                 success: function (response) {
                     var style = $.tplallocine.movie.substr(0, ($.tplallocine.movie.indexOf('</style>') + 8)),
-                        tpl = $.tplallocine.movie.replace(style, '');
+                        tpl = $.tplallocine.movie.replace(style, ''),
+                        relgroup = response.movie.release.releaseDate.split('-'),
+                        months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+                        rel = [relgroup[2], months[parseInt(relgroup[1], 10) - 1], relgroup[0]].join(' ');
+                    response.movie.release.releaseDate = rel;
+                    response.movie.runtime = '' + Math.floor(response.movie.runtime / 3600) + 'h' + ((response.movie.runtime % 3600) / 60);
                     $(editor.doc.head).html(style);
                     editor.execCommand(data.command, Mustache.render(tpl, response.movie), null, data.button);
                 }
