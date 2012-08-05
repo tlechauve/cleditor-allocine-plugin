@@ -28,6 +28,10 @@ module.exports = function(grunt) {
       dist: {
         src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
         dest: 'dist/jquery.cleditor.allocine.min.js'
+      },
+      editor: {
+        src: ['<banner:meta.banner>', '<config:concat.editor.dest>'],
+        dest: 'dist/jquery.cleditor.allocine.complete.min.js'
       }
     },
     watch: {
