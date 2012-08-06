@@ -1,0 +1,16 @@
+<div style="background-color: #e6e6e6; height: 300px; font-size: 0.9em;">
+    <img style="height: inherit; vertical-align: middle;" src="{{poster.href}}" align="left"/>
+    <div style="padding: 10px 20px 10px 20px; height: 280px; overflow: auto; color: #1F1F1F; line-height: "120%";">
+        <span style="font-size: 1.2em; font-weight: bold; text-decoration: underline;">
+            {{# title }} {{ title }} {{/ title }}
+            {{^ title }} {{ originalTitle }} {{/ title }}
+        </span>
+        <table style="margin: 20px 0px 20px 0px;">
+            <tr><td style="min-width: 90px;">Réalisateur</td><td>{{castingShort.directors}}</td></tr>
+            <tr><td style="min-width: 90px;">Acteurs</td><td>{{castingShort.actors}}, ...</td></tr>
+            <tr><td style="min-width: 90px;">Date de sortie</td><td>{{release.releaseDate}}</td></tr>
+            <tr><td style="min-width: 90px;">Durée</td><td>{{runtime}}</td></tr>
+        </table>
+        <div style="font-style: italic; padding: 10px; margin-top: 20px; background-color: white; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; -moz-box-shadow: 5px 6px 13px #000000; -webkit-box-shadow: 5px 6px 13px #000000; box-shadow: 5px 6px 13px #000000; font-size: 0.9em;">{{synopsis}}</div>
+    </div>
+</div>
