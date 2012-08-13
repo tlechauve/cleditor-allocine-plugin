@@ -1,4 +1,4 @@
-/*! allocine plugin for cleditor - v0.1.0 - 2012-08-06
+/*! allocine plugin for cleditor - v0.1.0 - 2012-08-13
 * https://github.com/tlechauve/cleditor-allocine-plugin
 * Copyright (c) 2012 Thomas Lechauve; Licensed MIT */
 
@@ -687,7 +687,9 @@ var Mustache;
                 if (value.length > 1) {
                     $("#movielist").html('').allocine('searchMovie', value, {
                         success: function (response) {
-                            response = $.parseJSON(response);
+                            if (typeof response !== 'object') {
+                                response = $.parseJSON(response);
+                            }
                             var $this = $(this);
                             if (response.feed.count > 1) {
                                 $this.html(Mustache.render($.tplallocine.movieitem, response.feed));
@@ -707,7 +709,9 @@ var Mustache;
             var editor = data.editor;
             $(editor).allocine('getMovie', code, {
                 success: function (response) {
-                    response = $.parseJSON(response);
+                    if (typeof response !== 'object') {
+                        response = $.parseJSON(response);
+                    }
                     var relgroup = response.movie.release.releaseDate.split('-'),
                         months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
                         rel = [relgroup[2], months[parseInt(relgroup[1], 10) - 1], relgroup[0]].join(' ');
