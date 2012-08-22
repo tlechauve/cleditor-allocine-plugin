@@ -17,6 +17,9 @@
                 if (value.length > 1) {
                     $("#movielist").html('').allocine('searchMovie', value, {
                         success: function (response) {
+                            if (typeof response !== 'object') {
+                                response = $.parseJSON(response);
+                            }
                             var $this = $(this);
                             if (response.feed.count > 1) {
                                 $this.html(Mustache.render($.tplallocine.movieitem, response.feed));
@@ -36,6 +39,9 @@
             var editor = data.editor;
             $(editor).allocine('getMovie', code, {
                 success: function (response) {
+                    if (typeof response !== 'object') {
+                        response = $.parseJSON(response);
+                    }
                     var relgroup = response.movie.release.releaseDate.split('-'),
                         months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
                         rel = [relgroup[2], months[parseInt(relgroup[1], 10) - 1], relgroup[0]].join(' ');
@@ -58,7 +64,21 @@
         popupContent: $.tplallocine.popup,
         buttonClick: movieClick
     };
+
+    $.cleditor.buttons.trailer = {
+        name: 'trailer',
+        image: 'trailer.jpg',
+        title: 'Ajouter une bande annonce',
+        command: 'inserthtml',
+        popupName 'trailer',
+        popupClass 'cleditorPrompt',
+        popupContent: $.tplallocine.popup,
+        buttonClick: movieClick
+    };
+
     // Add the button to the default controls before the bold button
     $.cleditor.defaultOptions.controls = $.cleditor.defaultOptions.controls
-        .replace('bold', 'movie bold');
+        .replace('bold', 'movie trailer bold');
+
+
 }(jQuery));
